@@ -1,8 +1,8 @@
 # online_course
 
-A new Flutter project.
+Online Course (Flutter UI Exploration)
 
-## Getting Started
+## Screen Shoot
 
 This project is a starting point for a Flutter application.
 

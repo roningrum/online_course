@@ -22,7 +22,6 @@ Route<dynamic> generateRoute(RouteSettings settings){
         },
         transitionDuration: Duration(milliseconds: 800)
       );
-      return MaterialPageRoute(builder: (context) => DetailPage());
     default:
       throw('This route name does not exist');
   }
