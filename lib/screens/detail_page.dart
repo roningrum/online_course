@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:online_course/route/route.dart';
 import 'package:online_course/theme.dart';
 import 'package:online_course/widgets/chip_widget.dart';
 import 'package:online_course/widgets/item_video_course.dart';
@@ -13,23 +14,26 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  final ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController(initialScrollOffset: 2);
   Widget headerDetail() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        RoundedButton(
-          icon: 'assets/icons/back_detail.png',
-          width: 12,
-          height: 12,
+        GestureDetector(
+          child: RoundedButton(
+            icon: 'assets/icons/back_detail.png',
+            width: 12.0
+          ),
+          onTap: (){
+            Navigator.pushNamed(context, homePage);
+          },
         ),
         Text('Course Details',
             style: titleText.copyWith(fontSize: 14),
             textAlign: TextAlign.center),
         RoundedButton(
           icon: 'assets/icons/substract.png',
-          width: 12,
-          height: 12,
+          width: 12
         ),
       ],
     );
@@ -136,9 +140,10 @@ class _DetailPageState extends State<DetailPage> {
             color: whiteCard, borderRadius: BorderRadius.circular(12)),
         child: Scrollbar(
           isAlwaysShown: true,
-          hoverThickness: 1,
+          hoverThickness: 2,
           controller: _scrollController,
           child: ListView(
+            controller: _scrollController,
             children: [
              ItemVideoCourse('1', 'Visual Design Intro', '04:47'),
              ItemVideoCourse('2', 'Design Reference', '03:45'),

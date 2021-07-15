@@ -16,6 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isLoading = true;
+
   Widget header() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,19 +80,19 @@ class _HomePageState extends State<HomePage> {
             scrollDirection: Axis.horizontal,
             children: [
               GestureDetector(
-                  child: RoundedPopularCard(
-                      imageCourse: 'assets/images/wireframe.png',
-                      nameCourse: 'UI Design : Wireframeto Visual Design',
-                      userReview: '(4016)'),
-                onTap: (){
-                    setState(() {
-                      Navigator.pushNamed(context, detailPage);
-                    });
+                child: RoundedPopularCard(
+                    imageCourse: 'assets/images/wireframe.png',
+                    nameCourse: 'UI Design : Wireframe to\nVisual Design',
+                    userReview: '(4016)'),
+                onTap: () {
+                  setState(() {
+                    Navigator.pushNamed(context, detailPage);
+                  });
                 },
               ),
               RoundedPopularCard(
                   imageCourse: 'assets/images/styleguide.png',
-                  nameCourse: 'UI Design : Styleguidewith Figma',
+                  nameCourse: 'UI Design : Styleguidee\nwith Figma',
                   userReview: '(1055)')
             ],
           ),
@@ -120,29 +122,45 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 8), () =>
+        setState((){
+          isLoading = false;
+        })
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(right: 24, left: 24, top: 24),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  header(),
-                  SizedBox(height: 12),
-                  Text('''Want to Study Class\nwhat\'s Today?''',
-                      style: titleText),
-                  SizedBox(height: 12),
-                  category(),
-                  SizedBox(height: 24),
-                  popular(context),
-                  SizedBox(height: 24),
-                  articles()
-                ],
-              ),
-            ),
-          ),
+          child: isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                  color: bluePrimary,
+                  strokeWidth: 5,
+                ))
+              : Padding(
+                  padding: EdgeInsets.only(right: 24, left: 24, top: 24),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        header(),
+                        SizedBox(height: 12),
+                        Text('''Want to Study Class\nwhat\'s Today?''',
+                            style: titleText),
+                        SizedBox(height: 12),
+                        category(),
+                        SizedBox(height: 24),
+                        popular(context),
+                        SizedBox(height: 24),
+                        articles()
+                      ],
+                    ),
+                  ),
+                ),
         ),
         bottomNavigationBar: Container(
           height: 72,

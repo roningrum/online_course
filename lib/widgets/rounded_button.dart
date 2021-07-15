@@ -19,7 +19,7 @@ class RoundedButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(6)
       ),
       child: IconButton(
-        onPressed: (){},
+        onPressed: null,
         padding: EdgeInsets.all(0),
         icon: Image.asset(icon!, width: width, height: height),
       ),
